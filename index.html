@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lorentz Transformation Visualizer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="controls">
+    <div class="firstRow" style="text-align: center; width: 100%;">
+      <label for="velInput" style="text-decoration: underline; display: inline-block; margin-right: 10px;">
+        <strong style="font-size: 1.5em;">Lorentz Transformation Sim</strong>
+      </label>
+      <label for="betaRange" style="display: inline-block;">β = v/c: <span id="betaVal">0.00</span></label>
+      <input type="range" id="betaRange" min="-0.99" max="0.99" step="0.01" value="0" />
+      <input type="number" id="betaInput" step="0.01" min="-0.99" max="0.99" value="0.00" />
+    </div>
+    <br>
+    <label for="velInput">Add Velocity (-c, c): </label>
+    <input 
+      type="number" 
+      id="velInput" 
+      step="0.01" 
+      min="-0.99" 
+      max="0.99" 
+      value="0.00"
+    />
+    <button id="addVel">Enter</button>
+    <button id="timeDilation">Time Dilation</button>
+    <button id="addCat">Length Contraction</button>
+    <button id="ladderBarn">Ladder and Barn Paradox</button>
+    <button id="twinParadox">Twin Paradox</button>
+    <button id="hyperbola">Hyperbola</button>
+    <button id="saveDiagram">Save Diagram</button>
+    <button id="clearVel">Clear</button>  
+  </div>
+  <canvas id="canvas"></canvas>
+  <button id="instructionsButton" style="margin:16px;"><strong>Instructions</strong></button>
+
+  <div id="instructionsPop" style="
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 10%;
+      width: 80%;
+      max-height: 80%;
+      overflow-y: auto;
+      background-color: #f9f9f9;
+      border: 2px solid #ccc;
+      padding: 16px;
+      z-index: 1000;">
+    <button id="closeInstructions" style="float:right;">Close</button>
+    <h2>How to Use the Diagram</h2>
+    <p>
+      This Lorentz Transformation Visualizer demonstrates several fundamental concepts of 
+      special relativity. The diagram shows a space-time grid that is transformed by varying the 
+      speed (β) parameter. Below you will find an explanation for each control and function.
+    </p>
+    
+    <h3>General Controls</h3>
+    <ul>
+      <li>
+        <strong>β Slider / Number Input:</strong>
+        Adjust these controls to change the transformation parameter (β = v/c). This affects 
+        the Lorentz transformation used in all visualizations. All points on the diagram are transformed 
+        with the current value of β.
+      </li>
+      <li>
+        <strong>Zoom & Drag:</strong>
+        You can drag the diagram by clicking and moving the mouse, and use the mouse wheel to zoom in/out.
+      </li>
+    </ul>
+
+    <h3>Function Buttons and Their Effects</h3>
+    <ul>
+      <li>
+        <strong>Enter (Add Velocity):</strong>
+        Adds a new velocity line on the diagram. Each line represents a worldline corresponding to a 
+        chosen velocity (v). The code pushes each new velocity (if fewer than 6 exist) into an array and then
+        the velocity line is Lorentz transformed using the current β value. Internally, the function loops 
+        over time and plots transformed endpoints.
+      </li>
+      <li>
+        <strong>Time Dilation:</strong>
+        Prompts you to choose one of the added velocity lines. Upon selection, the diagram will highlight 
+        time dilation effects for that specific velocity. The related function uses the selected velocity to 
+        set β value and re-renders the diagram.
+      </li>
+      <li>
+        <strong>Length Contraction:</strong>
+        Adds a pair of worldlines that simulate length contraction. Internally, the function 
+        computes two sets of points (for the head and tail) along fixed S‑frame positions. 
+        It then applies the Lorentz transform to these points using the current β, drawing both individual dots 
+        and connecting lines. The area between these lines is filled with a translucent color to emphasize the 
+        contraction effect.
+      </li>
+      <li>
+        <strong>Ladder and Barn Paradox:</strong>
+        Visualizes the classic paradox where a ladder (inclined line) passes through a barn (vertical lines). 
+        The barn is drawn similarly to the cat worldlines (with fixed boundaries that get transformed), and the 
+        ladder is drawn by sampling points along two inclined lines. The ladder edges are computed using equations 
+        based on the S‑frame and are Lorentz transformed for the current β.
+      </li>
+      <li>
+        <strong>Twin Paradox:</strong>
+        This button draws three distinct worldline segments representing the twin paradox scenario:
+        <ul>
+          <li> A vertical line for the stay-at-home twin.</li>
+          <li> An outbound leg given for the traveling twin.</li>
+          <li> A return leg given once the twin turns around.</li>
+        </ul>
+        Each segment is Lorentz transformed by the current β, so that changes to β update their orientation.
+      </li>
+      <li>
+        <strong>Hyperbola:</strong>
+        When activated, this function draws one or more hyperbolas under the equation t² – x² = τ². These curves 
+        represent surfaces of constant proper time. The code loops over a range of proper-time values (τ) and for each, 
+        it computes (x, t) pairs, then transforms them using the current β before mapping to canvas coordinates.
+      </li>
+      <li>
+        <strong>Clear:</strong>
+        Resets the diagram by clearing all arrays and resetting all flags; this includes velocity lines, the cat, ladder/barn, 
+        twin paradox, and hyperbola visualizations.
+      </li>
+      <li>
+        <strong>Save Diagram:</strong>
+        Saves the current view of the canvas as a PNG image.
+      </li>
+    </ul>
+    <p>
+      Enjoy experimenting with different values and scenarios!!!
+    </p>
+  </div>
+  
+  <script src="app.js"></script>
+</body>
+</html>
