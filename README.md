@@ -16,7 +16,7 @@ A vertical line for the stay-at-home twin.
 An outbound leg given for the traveling twin.
 A return leg given once the twin turns around.
 Each segment is Lorentz transformed by the current β, so that changes to β update their orientation.
-Hyperbola: When activated, this function draws one or more hyperbolas under the equation t² – x² = τ². These curves represent surfaces of constant proper time. The code loops over a range of proper-time values (τ) and for each, it computes (x, t) pairs, then transforms them using the current β before mapping to canvas coordinates.
+Hyperbola: When activated, this function draws one or more hyperbolas under the equation t² – x² = τ². These curves represent surfaces of constant proper time. The code loops over a range of proper-time values (τ) and for each, it computes (x, t) pairs, then transforms them using the current β before mapping to canvas coordinates.Each point on a hyperbola will move to another point on that same hyperbola when Lorentz transformed.
 Clear: Resets the diagram by clearing all arrays and resetting all flags; this includes velocity lines, the cat, ladder/barn, twin paradox, and hyperbola visualizations.
 Save Diagram: Saves the current view of the canvas as a PNG image.
 Enjoy experimenting with different values and scenarios!!!
