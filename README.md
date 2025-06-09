@@ -1,5 +1,7 @@
 # lorentz-transform-sim
 lorentz transform visualization (simple)
+The below content is also available in the html, reading it in the html is recommended.
+
 How to Use the Diagram
 This Lorentz Transformation Visualizer demonstrates several fundamental concepts of special relativity. The diagram shows a space-time grid that is transformed by varying the speed (β) parameter. Below you will find an explanation for each control and function.
 
